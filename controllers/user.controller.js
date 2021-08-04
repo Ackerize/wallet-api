@@ -1,7 +1,7 @@
 const User = require("../models/User");
 
 // Create and Save a new User
-exports.create = (req, res) => {
+exports.create = async (req, res) => {
   // Validate request
   if (!req.body) {
     res.status(400).send({
@@ -13,7 +13,7 @@ exports.create = (req, res) => {
 
   User.findByUsernameOrEmail(req.body, (err, data) => {
     if (data)
-      res.status(500).send({
+      res.status(400).send({
         message: "A user with that username or email already exists.",
       });
     else
